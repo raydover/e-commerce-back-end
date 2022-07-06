@@ -3,7 +3,7 @@ const { Product, Category, Tag, ProductTag } = require("../../models");
 
 // The `/api/products` endpoint
 
-// get all products
+// GET all products
 router.get("/", (req, res) => {
   // find all products
   // be sure to include its associated Category and Tag data
@@ -20,14 +20,14 @@ router.get("/", (req, res) => {
       }
     ]
   })
-    .then(categoryData => res.json(categoryData))
+    .then(productData => res.json(productData))
     .catch(err => {
       console.log(err);
       res.status(500).json(err)
     });
 });
 
-// get one product
+// GET product by ID
 router.get("/:id", (req, res) => {
   // find a single product by its `id`
   // be sure to include its associated Category and Tag data
@@ -57,7 +57,7 @@ router.get("/:id", (req, res) => {
     });
 });
 
-// create new product
+// CREATE new product
 router.post("/", async (req, res) => {
   /* req.body should look like this...
     {
@@ -89,7 +89,7 @@ router.post("/", async (req, res) => {
     });
 });
 
-// update product
+// UPDATE product
 router.put("/:id", async (req, res) => {
   // update product data
   Product.update(req.body, {
@@ -131,22 +131,25 @@ router.put("/:id", async (req, res) => {
     });
 });
 
-router.delete("/:id", async (req, res) => {
+// Delete product by ID
+router.delete("/:id", (req, res) => {
   // delete one product by its `id` value
-  try {
-    const categoryData = await Category.destroy({
-      where: {
-        id: req.params.id,
-      },
-    });
-    if (!categoryData) {
-      res.status(404).json({ message: "No Product with this id!" });
-      return;
+  Product.destroy({
+    where: {
+      id: req.params.id,
     }
-    res.status(200).json(categoryData);
-  } catch (err) {
-    res.status(500).json(err);
-  }
+  })
+    .then(productData => {
+      if (!productData) {
+        res.status(404).json({ message: "No Product with this id!" });
+        return;
+      }
+      res.json(productData);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json(err);
+    });
 });
 
 module.exports = router;
