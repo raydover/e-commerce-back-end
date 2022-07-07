@@ -8,22 +8,22 @@ router.get("/", (req, res) => {
   // find all products
   // be sure to include its associated Category and Tag data
   Product.findAll({
-    attributes: ['id', 'product_name', 'price', 'stock'],
+    attributes: ["id", "product_name", "price", "stock"],
     include: [
       {
         model: Category,
-        attribute: ['category_name']
+        attributes: ["category_name"],
       },
       {
         model: Tag,
-        attribute: ['tag_name']
-      }
-    ]
+        attributes: ["tag_name"],
+      },
+    ],
   })
-    .then(productData => res.json(productData))
-    .catch(err => {
+    .then((productData) => res.json(productData))
+    .catch((err) => {
       console.log(err);
-      res.status(500).json(err)
+      res.status(500).json(err);
     });
 });
 
@@ -32,33 +32,36 @@ router.get("/:id", (req, res) => {
   // find a single product by its `id`
   // be sure to include its associated Category and Tag data
   Product.findOne({
-    attributes: ['id', 'product_name', 'price', 'stock'],
+    where: {
+      id: req.params.id,
+    },
+    attributes: ["id", "product_name", "price", "stock"],
     include: [
       {
         model: Category,
-        attribute: ['category_name']
+        attributes: ["category_name"]
       },
       {
         model: Tag,
-        attribute: ['tag_name']
+        attributes: ["tag_name"]
       }
     ]
   })
-    .then(productData => {
+    .then((productData) => {
       if (!productData) {
-        res.status(200).json({ message: 'No Product with this id!' });
+        res.status(404).json({ message: "No Product with this id!" });
         return;
       }
       res.json(productData);
     })
-    .catch(err => {
+    .catch((err) => {
       console.log(err);
-      res.status(500).json(err)
+      res.status(500).json(err);
     });
 });
 
 // CREATE new product
-router.post("/", async (req, res) => {
+router.post("/", (req, res) => {
   /* req.body should look like this...
     {
       product_name: "Basketball",
@@ -90,7 +93,7 @@ router.post("/", async (req, res) => {
 });
 
 // UPDATE product
-router.put("/:id", async (req, res) => {
+router.put("/:id", (req, res) => {
   // update product data
   Product.update(req.body, {
     where: {
@@ -137,9 +140,9 @@ router.delete("/:id", (req, res) => {
   Product.destroy({
     where: {
       id: req.params.id,
-    }
+    },
   })
-    .then(productData => {
+    .then((productData) => {
       if (!productData) {
         res.status(404).json({ message: "No Product with this id!" });
         return;

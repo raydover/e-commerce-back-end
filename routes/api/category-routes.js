@@ -67,7 +67,7 @@ router.put('/:id', (req, res) => {
   Category.update(req.body, {
     where: {
       id: req.params.id,
-    }
+    },
   })
     .then(categoryData => {
       if (!categoryData) {
@@ -87,7 +87,7 @@ router.delete('/:id', (req, res) => {
   Category.destroy({
     where: {
       id: req.params.id,
-    }
+    },
   })
     .then(categoryData => {
       if (!categoryData) {
