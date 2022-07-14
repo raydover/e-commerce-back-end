@@ -20,8 +20,6 @@ This assignement required students to create the back end for an e-commerce site
 
 ## Resources
 
-- [LIVE SITE](https://raydover.github.io/e-commerce-back-end/)
-
 - [Repository](https://github.com/raydover/e-commerce-back-end)
 
 ## Installation
