@@ -15,12 +15,12 @@ This assignement required students to create the back end for an e-commerce site
 
 ## Visuals
 
-- [E-Commerece-Back-End Video Link](INSERT link to Video)
-- [E-Commerece-Back-End Screenshot Link](INSERT Screenshot)
+- [E-Commerece-Back-End Video Link](https://drive.google.com/file/d/1-B7gkBqrtrm0MRXjees-CcSMJEhYKG2-/view)
+- [E-Commerece-Back-End Screenshot Insomina](./assets/e-commerce-back-end-screenshot.png)
 
 ## Resources
 
-- [Repository](https://github.com/raydover/e-commerce-back-end)
+- [GitHub Repository](https://github.com/raydover/e-commerce-back-end)
 
 ## Installation
 - Download through GitHub
@@ -29,11 +29,10 @@ This assignement required students to create the back end for an e-commerce site
 ## Usage
 - npm install
 - mysql - u root
-- source db/schema.ql
-- SHOW DATABASES;
+- source db/schema.sql
 - exit
-- run node server.js
-- make sure server.js is connected to SQL before continuing
+- npm run seed
+- npm start or nodemon
 
 ## Authors and Acknowledgements
 
